@@ -271,7 +271,7 @@ export const sendResetOtp = async (req, res) => {
     }
 
     const otp = String(Math.floor(100000 + Math.random() * 900000));
-    const otpExpiredAt = new Date(Date.now() + 15 * 60 * 1000);
+    const otpExpiredAt = Date.now() + 15 * 60 * 1000;
 
     await pool.query(
       "UPDATE user SET resetOtp = ?, resetOtpExpiredAt = ? WHERE email = ?",
@@ -313,36 +313,47 @@ export const resetPassword = async (req, res) => {
   const { email, otp, newPassword } = req.body;
 
   if (!email || !otp || !newPassword) {
-    res.json({ success: false, message: error.message });
+    return res.json({ success: false, message: "All fields are required" });
   }
 
   try {
-    const user = await userModel.findOne({ email });
-    if (!user) {
+    // Fetch user details from SQL
+    const [user] = await pool.query("SELECT * FROM user WHERE email = ?", [email]);
+
+    if (user.length === 0) {
       return res.json({ success: false, message: "User not found" });
     }
 
-    if (user.resetOtp.toString() !== otp || user.resetOtp.toString() === "") {
-      console.log("Stored OTP:", user.resetOtp, "Received OTP:", otp);
+    const foundUser = user[0];
+
+    // Check OTP
+    if (foundUser.resetOtp !== otp || !foundUser.resetOtp) {
+      console.log("Stored OTP:", foundUser.resetOtp, "Received OTP:", otp);
       return res.json({ success: false, message: "Invalid OTP" });
     }
-    user.resetOtp = otp;
 
-    if (user.resetOtpExpireAt < Date.now()) {
+    // Check OTP expiration
+    if (foundUser.resetOtpExpiredAt < Date.now()) {
       return res.json({ success: false, message: "OTP Expired" });
     }
 
+    // Hash new password
     const hashedPassword = await bcrypt.hash(newPassword, 10);
-    user.password = hashedPassword;
-    user.resetOtp = "";
-    user.resetOtpExpireAt = 0;
 
-    await user.save();
+    // Update password and reset OTP fields
+    await pool.query(
+      "UPDATE user SET password = ?, resetOtp = '', resetOtpExpiredAt = 0 WHERE email = ?",
+      [hashedPassword, email]
+    );
+
     return res.json({
       success: true,
-      message: "Password reseted successfully",
+      message: "Password reset successfully",
     });
+
   } catch (error) {
+    console.error("Error resetting password:", error);
     return res.json({ success: false, message: error.message });
   }
 };
+
