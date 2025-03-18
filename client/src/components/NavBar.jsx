@@ -38,7 +38,7 @@ const NavBar = () => {
   return (
     <div className="max-w-7xl mx-auto flex justify-between items-center p-4 sm:p-6 sm:px-24 absolute top-0 left-0 right-0">
 
-      <img src={assets.logo} alt="" className="w-28 sm:max-w-32" />
+      <img src="https://gauravgo.com/wp-content/uploads/2020/01/cropped-Transparent-Logo-.png" alt="" className="w-15 sm:max-w-30" />
       {userData ? 
       <div className="w-8 h-8 flex justify-center items-center rounded-full bg-gray-500 text-white relative group">
         {userData.name[0].toUpperCase()}
