@@ -45,7 +45,7 @@ const Login = () => {
     }
   }
   return (
-    <div className='flex items-center justify-center min-h-screen px-6 sm:px-0 bg-gradient-to-b from-gray-900 to-black sm:bg-[url(https://a-static.besthdwallpaper.com/neon-tunnel-wallpaper-2560x1920-84000_27.jpg)] bg-[url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjcLsQdc2MWtd44C66GEDY3S3IGQ8oN3Qnj7J_b5HX9O3_WbViPu_qeXcUJAtUVCmTTRs&usqp=CAU)] bg-cover bg-center'>
+    <div className='flex items-center justify-center min-h-screen px-6 sm:px-0 bg-gradient-to-b from-gray-900 to-black sm:bg-[url(https://e0.pxfuel.com/wallpapers/252/303/desktop-wallpaper-blue-space-35493.jpg)] bg-[url(https://i.pinimg.com/736x/50/38/cc/5038ccfef62ad4562fdbe66269e32bf5.jpg)] bg-cover bg-center'>
       <img onClick={()=>navigate('/')} alt=""  className='absolute left-5 sm:left-20 top-5 w-28 sm:w-32 cursor-pointer'/>
       <div className='bg-gradient-to-b from-gray-900 to-black p-10 rounded-lg shadow-lg w-full sm:w-96 text-indigo-300 text-sm'>
 

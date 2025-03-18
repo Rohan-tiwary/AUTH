@@ -18,7 +18,7 @@ const Header = () => {
   }
 
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-black text-white px-6 sm:px-0 bg-[url(https://c4.wallpaperflare.com/wallpaper/784/828/926/blue-stripes-4k-8k-wallpaper-preview.jpg)] bg-cover bg-center">
+    <div className="w-full h-screen flex items-center justify-center bg-black text-white px-6 sm:px-0 bg-[url(https://wallpapercave.com/wp/wp6656168.jpg)] bg-cover bg-center">
       {/* Content Container */}
       <div className="max-w-lg w-full bg-gradient-to-b from-gray-900 to-black p-10 rounded-lg shadow-2xl text-center space-y-6 border border-gray-700">
         {/* Avatar Section */}
