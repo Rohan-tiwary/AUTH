@@ -88,7 +88,7 @@ const Leaderboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white overflow-x-hidden p-4 sm:p-6">
+    <div className="min-h-screen bg-gray-900 text-white overflow-x-hidden p-4 sm:p-6 bg-[url(https://res.allmacwallpaper.com/get/Retina-MacBook-Air-13-inch-wallpapers/Surface-Of-The-Planet-2560x1600/9479-11.jpg)] bg-center bg-cover">
       <NavBar />
       <div className="flex flex-col items-center mb-6 p-4">
         <img src={user.pic} alt={user.name.name} className="w-24 h-24 rounded-full border-4 border-blue-500 shadow-lg" />
