@@ -88,7 +88,7 @@ const Leaderboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white overflow-x-hidden p-4 sm:p-6 bg-[url(https://res.allmacwallpaper.com/get/Retina-MacBook-Air-13-inch-wallpapers/Surface-Of-The-Planet-2560x1600/9479-11.jpg)] bg-center bg-cover">
+    <div className="h-screen bg-gray-900 text-white overflow-x-hidden p-4 sm:p-6 bg-[url(https://res.allmacwallpaper.com/get/Retina-MacBook-Air-13-inch-wallpapers/Surface-Of-The-Planet-2560x1600/9479-11.jpg)] bg-center bg-cover">
       <NavBar />
       <div className="flex flex-col items-center mb-6 p-4">
         <img src={user.pic} alt={user.name.name} className="w-24 h-24 rounded-full border-4 border-blue-500 shadow-lg" />
@@ -102,7 +102,7 @@ const Leaderboard = () => {
       </div>
 
       <div className="flex flex-wrap justify-center gap-3 mb-6">
-        {['score', 'history', 'winRate', 'matches', 'totalPoints', 'Performance','FAQ'].map((tab) => (
+        {['Statistics', 'history', 'matches', 'totalPoints', 'Performance','FAQ'].map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
@@ -116,80 +116,154 @@ const Leaderboard = () => {
       </div>
 
       <div className="bg-gray-800 p-4 sm:p-6 rounded-lg shadow-lg max-w-3xl mx-auto mb-8 overflow-hidden">
-        {activeTab === 'score' && <p className="text-white text-4xl">{user.score}</p>}
-        {activeTab === 'history' && user.history.map((match, index) => (
-          <div key={index} className="flex justify-between py-2 border-b border-gray-700">
-            <span>Match #{index + 1}</span>
-            <span className={match.won ? 'text-green-400' : 'text-red-400'}>
-              {match.won ? 'Victory' : 'Defeat'}
-            </span>
-          </div>
-        ))}
-        {activeTab === 'winRate' && <p className="text-white text-4xl">{user.winRate}%</p>}
-        {activeTab === 'matches' && <p className="text-white text-4xl">{user.matchesPlayed}</p>}
-        {activeTab === 'Performance' && (
-  <div className="bg-gray-900 p-4 rounded-lg shadow-lg w-full max-w-sm space-y-4">
-  <h2 className="text-white text-lg font-semibold mb-4">Performance</h2>
-
-  {/* Win Rate */}
-  <div>
-    <div className="flex items-center justify-between mb-1">
-      <span className="text-white">Win Rate</span>
-      <span className="text-white text-4xl">{user.winRate}%</span>
-    </div>
-    <div className="w-full bg-gray-700 rounded-full h-2">
-      <div className="bg-green-500 h-2 rounded-full" style={{ width: `${user.winRate}%` }}></div>
-    </div>
-  </div>
-
-  {/* Accuracy */}
-  <div>
-    <div className="flex items-center justify-between mb-1">
-      <span className="text-white">Accuracy Rate</span>
-      <span className="text-white text-4xl">69%</span>
-    </div>
-    <div className="w-full bg-gray-700 rounded-full h-2">
-      <div className="bg-yellow-300 h-2 rounded-full" style={{ width: '69%' }}></div>
-    </div>
-  </div>
-
-  {/* Kills */}
-  <div>
-    <div className="flex items-center justify-between mb-1">
-      <span className="text-white">Kills</span>
-      <span className="text-white text-4xl">20%</span>
-    </div>
-    <div className="w-full bg-gray-700 rounded-full h-2">
-      <div className="bg-red-500 h-2 rounded-full" style={{ width: '20%' }}></div>
-    </div>
-  </div>
+      {activeTab === 'Statistics' && (
+ <div className="grid grid-cols-2 md:grid-cols-4 gap-6 p-4 text-white">
+ {[
+   { label: 'Score', value: user.score },
+   { label: 'Level', value: 5 },
+   { label: 'Time', value: '03:45' },
+   { label: 'Enemies Killed', value: 12 },
+   { label: 'Coins Collected', value: 150 },
+   { label: 'Winrate', value: '68%' },
+   { label: 'Power-Ups', value: 3 },
+   { label: 'Rank', value: '#1' },
+ ].map((item, index) => (
+   <div
+     key={index}
+     className="relative group p-6 bg-gray-800/40 backdrop-blur-lg border border-gray-600 rounded-xl shadow-lg text-center hover:scale-105 transition-transform duration-300"
+   >
+     <div className="absolute inset-0 bg-gradient-to-br from-gray-700 to-gray-900 opacity-0 group-hover:opacity-50 transition-opacity duration-300 rounded-xl"></div>
+     <p className="text-lg font-semibold tracking-wide group-hover:text-yellow-400 transition-colors duration-300">
+       {item.label}
+     </p>
+     <p className="text-4xl font-bold mt-2 group-hover:text-cyan-400 transition-colors duration-300">
+       {item.value}
+     </p>
+   </div>
+ ))}
 </div>
 
-  
 )}
 
-        {activeTab === 'totalPoints' && (
-         <div className="text-center">
-         <p className="text-white text-5xl font-bold mb-6 animate-pulse">{user.totalPoints} Points</p>
-         {!redeemPoints ? (
-           <button
-             onClick={handleRedeemPoints}
-             className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-semibold px-8 py-3 rounded-xl shadow-lg hover:scale-105 hover:shadow-2xl transition-transform duration-300 ease-out"
-           >
-             🎉 Redeem Your Points
-           </button>
-         ) : (
-           <button
-             onClick={handlePaymentGateway}
-             className="bg-gradient-to-r from-green-400 to-green-600 text-white font-semibold px-8 py-3 rounded-xl shadow-lg hover:scale-105 hover:shadow-2xl transition-transform duration-300 ease-out"
-           >
-             💸 Go to Payment Gateway
-           </button>
-         )}
-         
-       </div>
-       
-        )}
+{activeTab === 'history' && (
+  <div className="space-y-4 p-4 bg-gray-800/50 rounded-lg shadow-lg">
+    {user.history.map((match, index) => (
+      <div
+        key={index}
+        className="flex items-center justify-between p-4 rounded-lg bg-gray-700/60 hover:bg-gray-700 transition duration-300 border border-gray-600 shadow-sm"
+      >
+        <span className="text-lg font-semibold text-white">
+          Match #{index + 1}
+        </span>
+        <span
+          className={`text-lg font-bold ${
+            match.won ? 'text-green-400' : 'text-red-400'
+          }`}
+        >
+          {match.won ? 'Victory' : 'Defeat'}
+        </span>
+      </div>
+    ))}
+  </div>
+)}
+
+{activeTab === 'matches' && (
+  <div className="p-6 bg-gray-800/50 rounded-lg shadow-lg text-center space-y-4 border border-gray-700">
+    <h2 className="text-2xl font-bold text-white tracking-wider">Matches Played</h2>
+    <p className="text-5xl font-extrabold text-cyan-400 drop-shadow-lg animate-pulse">
+      {user.matchesPlayed}
+    </p>
+    <div className="grid grid-cols-2 gap-4">
+      <div className="p-4 bg-gray-700/60 rounded-lg hover:scale-105 transition-transform duration-300">
+        <p className="text-lg text-gray-300">Victories</p>
+        <p className="text-3xl text-green-400 font-bold">{user.victories}</p>
+      </div>
+      <div className="p-4 bg-gray-700/60 rounded-lg hover:scale-105 transition-transform duration-300">
+        <p className="text-lg text-gray-300">Defeats</p>
+        <p className="text-3xl text-red-400 font-bold">{user.defeats}</p>
+      </div>
+    </div>
+  </div>
+)}
+
+{activeTab === 'Performance' && (
+  <div className="bg-gray-900 p-6 rounded-lg shadow-lg w-full max-w-lg space-y-6 flex justify-center aign-items-center flex-col sm:ml-32.5">
+    <h2 className="text-white text-2xl font-bold mb-4 text-center">Performance Overview</h2>
+
+    {[
+      { label: 'Win Rate', value: user.winRate, color: 'bg-green-500' },
+      { label: 'Accuracy Rate', value: 69, color: 'bg-yellow-300' },
+      { label: 'Kills', value: 20, color: 'bg-red-500' },
+      { label: 'Survival Rate', value: 85, color: 'bg-blue-400' },
+      { label: 'Headshots', value: 45, color: 'bg-purple-500' },
+      { label: 'Challenges Completed', value: 92, color: 'bg-pink-500' },
+    ].map((stat, index) => (
+      <div key={index}>
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-white text-lg">{stat.label}</span>
+          <span className="text-white text-4xl font-bold">{stat.value}%</span>
+        </div>
+        <div className="w-full bg-gray-700 rounded-full h-3">
+          <div
+            className={`h-3 rounded-full ${stat.color} transition-all duration-500 ease-out`}
+            style={{ width: `${stat.value}%` }}
+          ></div>
+        </div>
+      </div>
+    ))}
+
+    {/* Overall Rating */}
+    <div className="text-center mt-6">
+      <p className="text-white text-lg mb-2">Overall Performance</p>
+      <p className="text-yellow-400 text-5xl font-extrabold animate-pulse">{Math.floor((user.winRate + 69 + 20 + 85 + 45 + 92) / 6)}%</p>
+    </div>
+  </div>
+)}
+
+
+{activeTab === 'totalPoints' && (
+  <div className="flex flex-col items-center space-y-8 bg-gray-900 p-8 rounded-xl shadow-lg border border-gray-700 max-w-lg mx-auto ">
+    {/* Total Points Display */}
+    <div className="bg-gray-800 px-12 py-6 rounded-lg shadow-md border border-yellow-500">
+      <p className="text-black-400 text-6xl font-extrabold tracking-wide">
+        {user.totalPoints}
+      </p>
+      <p className="text-gray-300 text-lg mt-2 text-center">Total Points</p>
+    </div>
+
+    {/* Points Breakdown */}
+    <div className="w-full flex justify-between text-gray-300 text-sm px-4">
+      <div>
+        <p className="font-semibold">Earned:</p>
+        <p className="text-green-400">+500</p>
+      </div>
+      <div>
+        <p className="font-semibold">Redeemed:</p>
+        <p className="text-red-400">-400</p>
+      </div>
+    </div>
+
+    {/* Action Buttons */}
+    <div className="flex space-x-4 w-full justify-center">
+      {!redeemPoints ? (
+        <button
+          onClick={handleRedeemPoints}
+          className="bg-green-500 text-black font-semibold px-6 py-3 rounded-lg shadow hover:bg-yellow-400 transition duration-200"
+        >
+          🎉 Redeem Points
+        </button>
+      ) : (
+        <button
+          onClick={handlePaymentGateway}
+          className="bg-green-500 text-white font-semibold px-6 py-3 rounded-lg shadow hover:bg-green-400 transition duration-200"
+        >
+          💸 Payment Gateway
+        </button>
+      )}
+    </div>
+  </div>
+)}
+
         {activeTab === 'FAQ' && FAQ.map((FAQ, index) => (
           <div key={index} className="mb-4">
             <button className="w-full text-left text-blue-400" onClick={() => setOpenFAQ(openFAQ === index ? null : index)}>
@@ -206,7 +280,7 @@ const Leaderboard = () => {
         </button>
       </div>
 
-      <footer className="mt-8 text-center text-gray-500 text-sm">
+      <footer className="mt-8 text-center text-sm">
         © 2025 GauravGo Gaming Leaderboard. All rights reserved.
       </footer>
     </div>
