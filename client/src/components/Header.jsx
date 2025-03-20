@@ -49,9 +49,10 @@ const Header = () => {
         </p>
 
         {/* Get Started Button */}
-        <button className="mt-4 w-full py-2 rounded-full bg-gradient-to-r from-neon-green to-neon-blue font-medium transition-transform transform hover:scale-105 hover:shadow-neon-glow">
-          Get Started
-        </button>
+        <button className="mt-4 w-full py-2 rounded-full bg-gradient-to-r from-green-400 to-blue-500 font-medium transition-transform transform hover:scale-105 hover:shadow-lg">
+  Get Started
+</button>
+
       </div>
     </div>
   );
