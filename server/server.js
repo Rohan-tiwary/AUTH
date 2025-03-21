@@ -11,7 +11,7 @@ const allowedOrigin = [
   'http://65.2.112.209',
   'http://65.2.112.209:5173',
   'http://localhost',
-  'https://your-netlify-app.netlify.app',
+  'https://app.netlify.com',
   'http://localhost:5173'
 ];
 
