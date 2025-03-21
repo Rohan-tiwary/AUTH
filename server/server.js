@@ -16,7 +16,7 @@ const allowedOrigin = [
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: '*', credentials: true }));
+app.use(cors({ origin: allowedOrigin, credentials: true }));
 
 // Test MySQL connection on server start
 (async () => {
