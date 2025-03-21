@@ -6,7 +6,7 @@ import pool from "./config/mysql.js";  // Import MySQL connection
 
 const app = express();
 const port = process.env.PORT || 4000;
-const allowedOrigin = ['http://localhost:5173', 'https://1tp4lqxh-5173.inc1.devtunnels.ms'];
+const allowedOrigin = ['http://localhost:5173', 'https://1tp4lqxh-5173.inc1.devtunnels.ms' ,'http://65.2.112.209/','http://localhost:4173',''];
 
 app.use(express.json());
 app.use(cookieParser());
