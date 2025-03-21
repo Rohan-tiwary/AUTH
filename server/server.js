@@ -11,12 +11,16 @@ const allowedOrigin = [
   'http://65.2.112.209',
   'http://65.2.112.209:5173',
   'http://localhost',
-  'https://your-netlify-app.netlify.app'
+  'https://your-netlify-app.netlify.app',
+  'http://localhost:5173'
 ];
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: allowedOrigin, credentials: true }));
+app.use(cors({  origin: allowedOrigin, 
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true }));
 
 // Test MySQL connection on server start
 (async () => {
