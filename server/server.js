@@ -6,11 +6,17 @@ import pool from "./config/mysql.js";  // Import MySQL connection
 
 const app = express();
 const port = process.env.PORT || 4000;
-const allowedOrigin = ['http://localhost:5173', 'https://1tp4lqxh-5173.inc1.devtunnels.ms' ,'http://65.2.112.209/','http://localhost:4173',''];
+const allowedOrigin = [
+  'http://localhost:5173',
+  'http://65.2.112.209',
+  'http://65.2.112.209:5173',
+  'http://localhost',
+  'https://your-netlify-app.netlify.app'
+];
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: allowedOrigin, credentials: true }));
+app.use(cors({ origin: '*', credentials: true }));
 
 // Test MySQL connection on server start
 (async () => {
