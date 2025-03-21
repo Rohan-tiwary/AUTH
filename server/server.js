@@ -12,7 +12,8 @@ const allowedOrigin = [
   'http://65.2.112.209',
   'http://65.2.112.209:5173',
   'http://localhost',
-  'https://app.netlify.com'
+  'https://app.netlify.com',
+  'http://65.2.112.209:4000/'
 ];
 
 app.use(express.json());
